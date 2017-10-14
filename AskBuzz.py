@@ -84,9 +84,8 @@ def dining_hall_hours(hall):
     return statement(data.diningHours(hall.lower()))
 
 @ask.intent("ClassAvg")
-def get_class_avg(str_class):
-    print(str_class)
-    return statement(data.courseCritique(str_class))
+def get_class_avg(classname):
+    return statement(data.courseCritique(classname))
 
 @ask.intent("NextBus")
 def next_bus(col=None):
