@@ -29,7 +29,9 @@ def login():
 def doDuo():
     browser.switch_to_frame("duo_iframe")
     time.sleep(4)
+    browser.find_element_by_xpath("/html/body/div/div[1]/div/form/div/div/label/input").click()
     browser.find_element_by_class_name("auth-button").click()
+    time.sleep(10)
 
 
 
