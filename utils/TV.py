@@ -126,5 +126,5 @@ def find_channel(name):
 
 
 if __name__ == "__main__":
-    c = find_channel("mtv l")
+    c = find_channel("mtv")
     print(c)
