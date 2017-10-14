@@ -68,6 +68,10 @@ def dining_opens():
 
 @ask.intent("DiningHallOpen")
 def dining_hall_open(hall):
+    if hall == "north avenue":
+        return statement(data.isOpen("north ave")[1])
+    elif hall == "britian":
+        return statement(data.isOpen("brittain")[1])
     return statement(data.isOpen(hall)[1])
 
 @ask.intent("NextBus")
