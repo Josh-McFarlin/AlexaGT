@@ -64,8 +64,7 @@ def diningHours(hall):
     else:
         times = times.split("-")
     return "{} is open from {} to {}".format(hall, times[0], times[1])
-
-
+    
 def courseCritique(str_class):
     if " " in str_class:
         str_class = str_class.replace(" ", "")

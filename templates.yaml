@@ -3,6 +3,7 @@ GoodWord: To hell with Georgia!
 MyClasses: Your classes are {{ classes|join(", ") }}.
 
 WhiteGold: |
+ <speak><emphasis level="reduced">
  Oh well it's up with the White and Gold,
  Down with the Red and Black,
  Georgia Tech is out for a victory.
@@ -11,9 +12,10 @@ WhiteGold: |
  Down on the old farm there will be no sound,
  Till our bow-wows rip through the air;
  When the battle is over Georgia's team will be found,
- With the Yellow Jackets swarming around!
+ With the Yellow Jackets swarming around!</speak></emphasis>
 
 RamblinWreck: |
+ <speak><emphasis level="reduced">
  I'm a Ramblin' Wreck from Georgia Tech, and a hell of an engineer—
  A helluva, helluva, helluva, helluva, hell of an engineer.
  Like all the jolly good fellows, I drink my whiskey clear.
@@ -25,9 +27,10 @@ RamblinWreck: |
  Oh, I wish I had a barrel of rum and sugar three thousand pounds,
  A college bell to put it in and a clapper to stir it round.
  I'd drink to all the good fellows who come from far and near.
- I'm a ramblin', gamblin', hell of an engineer!
+ I'm a ramblin', gamblin', hell of an engineer!</speak></emphasis>
 
 AlmaMater: |
+ <speak><emphasis level="reduced">
  Oh, sons of Tech, arise, behold!
  The banner as it reigns supreme,
  For from on high the White and Gold
@@ -47,7 +50,7 @@ AlmaMater: |
  We're ever one in joy or pain,
  And our union is a lasting bond.
  Oh! May we be united.
- Till the victory of life is won.
+ Till the victory of life is won.</speak></emphasis>
 
 GeorgePBurdell: >
  The legendary Tech student George P. Burdell who enrolled in 1927 is said to possess nearly every degree
@@ -56,3 +59,5 @@ GeorgePBurdell: >
  so Burdell obtained a B.S. 1930, got a Master's, and in World War II, went to Harvard and joined the Army Air Forces.
 
 GTPD: 404 894 2500
+
+Tweets: Buzz's recent tweets include {{ tweets|join("... ") }}.
