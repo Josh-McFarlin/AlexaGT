@@ -1,6 +1,5 @@
 import time
 import datetime
-import selenium
 from selenium import webdriver
 
 dining = {'north ave': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
@@ -14,7 +13,7 @@ dining = {'north ave': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wedn
                            'Sunday': '8 AM - 2 AM'}}
 
 
-def isOpen(dining_hall):
+def is_open(dining_hall):
     times = dining[dining_hall][time.strftime("%A")]
     if times == "CLOSED":
         return False, "{} is closed today".format(dining_hall)
@@ -41,13 +40,13 @@ def isOpen(dining_hall):
         return True, "{} is open now until {}".format(dining_hall, times[1].strip())
 
 
-def diningOpen():
+def dining_open():
     openlist = []
-    if isOpen("north ave")[0]:
+    if is_open("north ave")[0]:
         openlist.append("North Ave")
-    if isOpen("brittain")[0]:
+    if is_open("brittain")[0]:
         openlist.append("Brittain")
-    if isOpen("west village")[0]:
+    if is_open("west village")[0]:
         openlist.append("West Village")
     if len(openlist) == 0:
         return "Nothing is open today"
@@ -57,15 +56,16 @@ def diningOpen():
         return "{} and {} are open today".format(openlist[0], openlist[1])
 
 
-def diningHours(hall):
+def dining_hours(hall):
     times = dining[hall][time.strftime("%A")]
     if times == "CLOSED":
         return "{} is closed today".format(hall)
     else:
         times = times.split("-")
     return "{} is open from {} to {}".format(hall, times[0], times[1])
-    
-def courseCritique(str_class):
+
+
+def course_critique(str_class):
     if " " in str_class:
         str_class = str_class.replace(" ", "")
     browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")

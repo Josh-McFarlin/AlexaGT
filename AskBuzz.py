@@ -76,37 +76,49 @@ def good_word():
 
 @ask.intent("AllDiningOpen")
 def dining_opens():
-    return statement(data.diningOpen())
+    return statement(data.dining_open())
 
 
 @ask.intent("DiningHallOpen")
 def dining_hall_open(hall):
     if hall.lower() == "north avenue":
-        return statement(data.isOpen("north ave")[1])
+        return statement(data.is_open("north ave")[1])
     if hall.lower() == "britian":
-        return statement(data.isOpen("brittain")[1])
-    return statement(data.isOpen(hall.lower())[1])
+        return statement(data.is_open("brittain")[1])
+    return statement(data.is_open(hall.lower())[1])
+
 
 @ask.intent("DiningHallHours")
-def dining_hall_hours(hall):
+def dining_hall_hours(hall=None):
+    if hall is None:
+        return statement("Please specify a dining hall.")
     if hall.lower() == "north avenue":
-        return statement(data.diningHours("north ave"))
+        return statement(data.dining_hours("north ave"))
     if hall.lower() == "britian":
-        return statement(data.diningHours("brittain"))
-    return statement(data.diningHours(hall.lower()))
+        return statement(data.dining_hours("brittain"))
+    return statement(data.dining_hours(hall.lower()))
+
 
 @ask.intent("ClassAvg")
 def get_class_avg(classname):
-    return statement(data.courseCritique(classname))
+    return statement(data.course_critique(classname))
+
 
 @ask.intent("NextBus")
 def next_bus(col=None):
     if col is None:
-        col = "red"
+        return statement("Please specify a bus route.")
     echo_location = get_alexa_location()
     u = Buses.User(echo_location)
     nxt = Buses.sort_stops(u.lat, u.lng, col.lower())
     return statement(nxt)
+
+
+@ask.intent("TwitterUpdates")
+def twit():
+    tweets = Tweets.get_tweets('GeorgiaTech', 3)
+    msg = render_template('Tweets', tweets=tweets)
+    return statement(msg)
 
 
 @ask.intent('WREKRadio')
@@ -129,19 +141,29 @@ def twit():
     return statement(msg)
 
 
+@ask.intent('GetChannel')
+def channel(chaname):
+    tv_channel = TV.find_channel(chaname)
+    if tv_channel:
+        msg = "{name} is on channel {num}.".format(name=chaname, num=tv_channel)
+    else:
+        msg = "Sorry, this channel is not available."
+    return statement(msg)
+
+
 @ask.intent('AMAZON.PauseIntent')
 def pause():
-    return audio('Paused the stream.').stop()
+    return audio('Pausing WRECK Radio.').stop()
 
 
 @ask.intent('AMAZON.ResumeIntent')
 def resume():
-    return audio('Resuming.').resume()
+    return audio('Resuming WRECK Radio.').resume()
 
 
 @ask.intent('AMAZON.StopIntent')
 def stop():
-    return audio('stopping').clear_queue(stop=True)
+    return audio('Stopping WRECK Radio.').clear_queue(stop=True)
 
 
 if __name__ == '__main__':
