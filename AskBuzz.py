@@ -75,6 +75,13 @@ def dining_hall_open(hall):
         return statement(data.isOpen("brittain")[1])
     return statement(data.isOpen(hall.lower())[1])
 
+@ask.intent("DiningHallHours")
+def dining_hall_hours(hall):
+    if hall.lower() == "north avenue":
+        return statement(data.diningHours("north ave"))
+    if hall.lower() == "britian":
+        return statement(data.diningHours("brittain"))
+    return statement(data.diningHours(hall.lower()))
 
 @ask.intent("NextBus")
 def next_bus(col=None):

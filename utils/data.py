@@ -53,3 +53,12 @@ def diningOpen():
         return "Only {} is open today".format(openlist[0])
     elif len(openlist) == 2:
         return "{} and {} are open today".format(openlist[0], openlist[1])
+
+
+def diningHours(hall):
+    times = dining[hall][time.strftime("%A")]
+    if times == "CLOSED":
+        return False, "{} is closed today".format(hall)
+    else:
+        times = times.split("-")
+    return "{} is open from {} to {}".format(hall, times[0], times[1])
