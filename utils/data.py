@@ -1,5 +1,7 @@
 import time
 import datetime
+import selenium
+from selenium import webdriver
 
 dining = {'north ave': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
                         'Thursday': '7 AM - 2 AM', 'Friday': '7 AM - 10 PM', 'Saturday': '10 AM - 10 PM',
@@ -62,3 +64,13 @@ def diningHours(hall):
     else:
         times = times.split("-")
     return "{} is open from {} to {}".format(hall, times[0], times[1])
+
+
+def courseCritique(str_class):
+    if " " in str_class:
+        str_class = str_class.replace(" ", "")
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
+    browser.get("https://critique.gatech.edu/course.php?id={}".format(str_class))
+    avg_gpa = browser.find_element_by_xpath("/ html / body / div / div[1] / div / table / tbody / tr / td[2]").text
+    browser.quit()
+    return "The average grade for {} is {}".format(str_class, avg_gpa)
