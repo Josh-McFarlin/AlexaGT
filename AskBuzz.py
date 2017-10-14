@@ -66,6 +66,9 @@ def good_word():
 def dining_opens():
     return statement(data.diningOpen())
 
+@ask.intent("DiningHallOpen")
+def dining_hall_open(hall):
+    return statement(data.isOpen(hall))
 
 @ask.intent("NextBus")
 def next_bus(col=None):
