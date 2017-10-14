@@ -112,20 +112,19 @@ channels = {
 
 
 def find_channel(name):
+    chan = 0
     try:
-        print("a")
-        return channels[name]
-    except:
-        print("b")
+        chan = channels[name]
+    except KeyError:
         keys = list(channels.keys())
-        keys_index = [i.find(name) for i in keys]
-        print(keys_index)
-        print(max(keys_index))
-        greatest_name = keys.index(max(keys_index))
-        print(greatest_name)
-        return channels[greatest_name]
+        keys_lower = [i.lower() for i in keys]
+        keys_index = [i.find(name) for i in keys_lower]
+        greatest_index = keys_index.index(max(keys_index))
+        greatest_name = keys[greatest_index]
+        chan = channels[greatest_name]
+    return chan
 
 
 if __name__ == "__main__":
-    c = find_channel("Disc")
+    c = find_channel("mtv l")
     print(c)
