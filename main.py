@@ -1,9 +1,15 @@
 import time
+import pickle
 from selenium import webdriver
 import re
 from config import TS_Username, TS_Password
 
-browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
+
+#browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
+
+profile = webdriver.ChromeOptions()
+profile.add_argument('user-data-dir=chrome')
+browser = webdriver.Chrome(chrome_options=profile)
 
 
 def login():
@@ -12,23 +18,25 @@ def login():
 
     username = browser.find_element_by_id("username")
     password = browser.find_element_by_id("password")
-
     username.send_keys(TS_Username)
     password.send_keys(TS_Password)
-
     browser.find_element_by_name("submit").click()
-
     time.sleep(5)
+    if "portal" not in browser.current_url:
+        doDuo()
+
+
+def doDuo():
     browser.switch_to_frame("duo_iframe")
+    time.sleep(4)
     browser.find_element_by_class_name("auth-button").click()
 
-    time.sleep(10)
+
 
 
 # xPath = '//*[@id="siteLinkList"]/li[6]/a/span/span'
 xPath = '//*[@id="siteLinkList"]/li[2]/a/span'
 def getClasses():
-    """
     login()
     classes = []
    # browser.find_element_by_xpath(xPath).click()
@@ -38,9 +46,8 @@ def getClasses():
             classes.append(ele.get_attribute("title"))
         except:
             continue
-    return classes
-    """
-    return format_classes(['CS-1100-D2', 'CS-1331', 'ENGL-1101-A1,B2,C', 'HIST-2111-A', 'MATH-1552-B1,B2,B3'])
+    browser.quit()
+    return format_classes(classes)
 
 
 def format_classes(classes):
@@ -52,5 +59,4 @@ def format_classes(classes):
     return classes
 
 
-if __name__ == "__main__":
-    print(getClasses())
+login()
