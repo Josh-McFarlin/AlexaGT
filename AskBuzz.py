@@ -63,15 +63,15 @@ def good_word():
 
 @ask.intent("MyMealSwipes")
 def good_word():
-    return main.getMealSwipes()
+    return statement(main.getMealSwipes())
 
 @ask.intent("MyDiningDollars")
 def good_word():
-    return main.getDiningDollars()
+    return statement(main.getDiningDollars())
 
 @ask.intent("MyBuzzFunds")
 def good_word():
-    return main.getBuzzFunds()
+    return statement(main.getBuzzFunds())
 
 
 @ask.intent("AllDiningOpen")

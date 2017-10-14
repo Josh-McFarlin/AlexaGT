@@ -32,6 +32,7 @@ def login():
 def doDuo():
     browser.switch_to_frame("duo_iframe")
     time.sleep(4)
+    #driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
     browser.find_element_by_xpath("/html/body/div/div[1]/div/form/div/div/label/input").click()
     browser.find_element_by_class_name("auth-button").click()
     time.sleep(10)
@@ -88,7 +89,7 @@ def getBuzzFunds():
         left = ele.text
     except:
         print("frick")
-    return "You have ${} of Buzzfunds left. Buying Ramen".format(left)
+    return "You have {} of Buzzfunds left. Buying Ramen".format(left)
 
 
 def format_classes(classes):
