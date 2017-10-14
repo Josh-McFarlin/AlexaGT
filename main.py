@@ -15,15 +15,18 @@ def login():
             browser.add_cookie(cookie)
     except:
         print("Error lol")
-    browser.get('https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
-    username = browser.find_element_by_id("username")
-    password = browser.find_element_by_id("password")
-    username.send_keys(TS_Username)
-    password.send_keys(TS_Password)
-    browser.find_element_by_name("submit").click()
-    time.sleep(5)
-    if "portal" not in browser.current_url:
-        doDuo()
+    try:
+        browser.get('https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
+        username = browser.find_element_by_id("username")
+        password = browser.find_element_by_id("password")
+        username.send_keys(TS_Username)
+        password.send_keys(TS_Password)
+        browser.find_element_by_name("submit").click()
+        time.sleep(5)
+        if "portal" not in browser.current_url:
+            doDuo()
+    except:
+        print("error level 2")
 
 
 def doDuo():
@@ -59,5 +62,3 @@ def format_classes(classes):
         shortened = shortened.replace('-', ' ')
         classes[i] = shortened
     return classes
-
-login()
