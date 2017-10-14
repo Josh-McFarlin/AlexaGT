@@ -18,7 +18,11 @@ def get_tweets(user_name, count):
     user_tweets = api.user_timeline(screen_name=user_name, count=count)
     tweets = []
     for tweet in user_tweets:
-        tweets.append(tweet.text)
+        txt = tweet.text
+        for i in tweet.urls:
+            txt = txt.replace(i['url'], "")
+        tweets.append(txt)
+    return "\n".join(tweets)
 
 
-get_tweets('GeorgiaTech', 3)
+print(get_tweets('GeorgiaTech', 3))
