@@ -68,7 +68,7 @@ def dining_opens():
 
 @ask.intent("DiningHallOpen")
 def dining_hall_open(hall):
-    return statement(data.isOpen(hall))
+    return statement(data.isOpen(hall)[1])
 
 @ask.intent("NextBus")
 def next_bus(col=None):
