@@ -66,13 +66,15 @@ def good_word():
 def dining_opens():
     return statement(data.diningOpen())
 
+
 @ask.intent("DiningHallOpen")
 def dining_hall_open(hall):
     if hall.lower() == "north avenue":
         return statement(data.isOpen("north ave")[1])
-    elif hall.lower() == "britian":
+    if hall.lower() == "britian":
         return statement(data.isOpen("brittain")[1])
     return statement(data.isOpen(hall.lower())[1])
+
 
 @ask.intent("NextBus")
 def next_bus(col=None):
