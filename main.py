@@ -5,17 +5,14 @@ import re
 from config import TS_Username, TS_Password
 
 
-#browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
-
-profile = webdriver.ChromeOptions()
-profile.add_argument('user-data-dir=chrome')
-browser = webdriver.Chrome(chrome_options=profile)
-
+browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
 
 def login():
-    browser.get(
-        'https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
-
+    browser.get( 'https://t-square.gatech.edu')
+    cookies = pickle.load(open("cookies.pkl", "rb"))
+    for cookie in cookies:
+        browser.add_cookie(cookie)
+    browser.get( 'https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
     username = browser.find_element_by_id("username")
     password = browser.find_element_by_id("password")
     username.send_keys(TS_Username)
@@ -32,6 +29,7 @@ def doDuo():
     browser.find_element_by_xpath("/html/body/div/div[1]/div/form/div/div/label/input").click()
     browser.find_element_by_class_name("auth-button").click()
     time.sleep(10)
+    pickle.dump(browser.get_cookies(), open("cookies.pkl", "wb"))
 
 
 
@@ -48,7 +46,6 @@ def getClasses():
             classes.append(ele.get_attribute("title"))
         except:
             continue
-    browser.quit()
     return format_classes(classes)
 
 
