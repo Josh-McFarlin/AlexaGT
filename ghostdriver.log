@@ -1,38 +1,6 @@
-[INFO  - 2017-10-14T22:27:33.123Z] GhostDriver - Main - running on port 60466
-[INFO  - 2017-10-14T22:27:33.404Z] Session [df79e890-b12e-11e7-8f42-15684a3cc479] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2017-10-14T22:27:33.404Z] Session [df79e890-b12e-11e7-8f42-15684a3cc479] - page.customHeaders:  - {}
-[INFO  - 2017-10-14T22:27:33.404Z] Session [df79e890-b12e-11e7-8f42-15684a3cc479] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2017-10-14T22:27:33.404Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: df79e890-b12e-11e7-8f42-15684a3cc479
-[ERROR - 2017-10-14T22:28:12.482Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020092456
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:12.761Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020092737
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:13.020Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020092996
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:26.294Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020106272
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:26.611Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020106594
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:26.869Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020106846
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:27.148Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020107103
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:57.509Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020137479
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:57.843Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020137810
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:58.097Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020138077
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-10-14T22:28:58.357Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1508020138333
-
-  phantomjs://platform/console++.js:263 in error
+[INFO  - 2017-10-14T22:44:02.436Z] GhostDriver - Main - running on port 58741
+[INFO  - 2017-10-14T22:44:03.034Z] Session [2d568c10-b131-11e7-a1df-0552f9cd3cab] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-10-14T22:44:03.034Z] Session [2d568c10-b131-11e7-a1df-0552f9cd3cab] - page.customHeaders:  - {}
+[INFO  - 2017-10-14T22:44:03.034Z] Session [2d568c10-b131-11e7-a1df-0552f9cd3cab] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-10-14T22:44:03.034Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 2d568c10-b131-11e7-a1df-0552f9cd3cab
+[INFO  - 2017-10-14T22:49:02.450Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW

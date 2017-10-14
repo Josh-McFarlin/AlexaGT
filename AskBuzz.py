@@ -2,7 +2,7 @@ import logging
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session, audio, context
 from utils import Buses, data, Tweets
-from main import getClasses
+import main
 import requests
 
 app = Flask(__name__)
@@ -57,9 +57,21 @@ def george_burdell():
 
 @ask.intent("MyClasses")
 def good_word():
-    classes = getClasses()
+    classes = main.getClasses()
     msg = render_template('MyClasses', classes=classes)
     return statement(msg)
+
+@ask.intent("MyMealSwipes")
+def good_word():
+    return main.getMealSwipes()
+
+@ask.intent("MyDiningDollars")
+def good_word():
+    return main.getDiningDollars()
+
+@ask.intent("MyBuzzFunds")
+def good_word():
+    return main.getBuzzFunds()
 
 
 @ask.intent("AllDiningOpen")

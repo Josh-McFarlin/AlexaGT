@@ -54,6 +54,42 @@ def getClasses():
             continue
     return format_classes(classes)
 
+def getMealSwipes():
+    login()
+    browser.get("https://mealplan.gatech.edu/dashboard")
+    time.sleep(3)
+    left = ""
+    try:
+        ele = browser.find_element_by_id("blockplanBalance")
+        left = ele.text
+    except:
+        print("frick")
+    return "You have {} Meal Swipes left".format(left)
+
+def getDiningDollars():
+    login()
+    browser.get("https://mealplan.gatech.edu/dashboard")
+    time.sleep(3)
+    left = ""
+    try:
+        ele = browser.find_element_by_id("diningpointsBalance")
+        left = ele.text
+    except:
+        print("frick")
+    return "You have ${} of Dining Dollars left".format(left)
+
+def getBuzzFunds():
+    login()
+    browser.get("https://mealplan.gatech.edu/dashboard")
+    time.sleep(3)
+    left = ""
+    try:
+        ele = browser.find_element_by_id("buzzcardBalance")
+        left = ele.text
+    except:
+        print("frick")
+    return "You have ${} of Buzzfunds left. Buying Ramen".format(left)
+
 
 def format_classes(classes):
     for i in range(len(classes)):
