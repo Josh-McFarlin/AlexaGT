@@ -70,4 +70,5 @@ def courseCritique(str_class):
     browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.get("https://critique.gatech.edu/course.php?id={}".format(str_class))
     avg_gpa = browser.find_element_by_xpath("/ html / body / div / div[1] / div / table / tbody / tr / td[2]").text
+    browser.quit()
     return "The average grade for {} is {}".format(str_class, avg_gpa)
