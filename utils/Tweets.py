@@ -15,10 +15,10 @@ api = tweepy.API(auth)
 
 
 def get_tweets(user_name, count):
-    user = api.get_user(user_name)
     user_tweets = api.user_timeline(screen_name=user_name, count=count)
+    tweets = []
     for tweet in user_tweets:
-        print(tweet.text)
+        tweets.append(tweet.text)
 
 
 get_tweets('GeorgiaTech', 3)
