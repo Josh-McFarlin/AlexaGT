@@ -4,5 +4,7 @@
 
 GMaps_key = ""
 
-TS_Username = ""  # Just for testing purposes
-TS_Password = ""
+TW_CONSUMER_KEY = ""
+TW_CONSUMER_SECRET = ""
+TW_ACCESS_TOKEN_KEY = ""
+TW_ACCESS_TOKEN_SECRET = ""

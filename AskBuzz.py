@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, render_template
-from flask_ask import Ask, statement, question, session, audio, context
-from utils import Buses, data, Tweets
+from flask_ask import Ask, statement, audio, context, session
+from utils import Buses, data, Tweets, TV
 import main
 import requests
 
@@ -23,6 +23,14 @@ def get_alexa_location():
         addr = "{l1}, {city}, {state} {postal}".format(l1=j['addressLine1'], city=j['city'], state=j['stateOrRegion'],
                                                        postal=j['postalCode'])
         return addr
+
+
+def get_login():
+    user = session.user['accessToken']
+    split = user.split(',')
+    username = split[0]
+    password = split[1]
+    return [username, password]
 
 
 @ask.intent("GoodWord")
@@ -57,21 +65,28 @@ def george_burdell():
 
 @ask.intent("MyClasses")
 def good_word():
-    classes = main.getClasses()
+    user, passw = get_login()
+    classes = main.getClasses(user, passw)
     msg = render_template('MyClasses', classes=classes)
     return statement(msg)
 
+
 @ask.intent("MyMealSwipes")
 def good_word():
-    return statement(main.getMealSwipes())
+    user, passw = get_login()
+    return statement(main.get_meal_swipes(user, passw))
+
 
 @ask.intent("MyDiningDollars")
 def good_word():
-    return statement(main.getDiningDollars())
+    user, passw = get_login()
+    return statement(main.get_dining_dollars(user, passw))
+
 
 @ask.intent("MyBuzzFunds")
 def good_word():
-    return statement(main.getBuzzFunds())
+    user, passw = get_login()
+    return statement(main.get_buzz_funds(user, passw))
 
 
 @ask.intent("AllDiningOpen")
@@ -80,7 +95,9 @@ def dining_opens():
 
 
 @ask.intent("DiningHallOpen")
-def dining_hall_open(hall):
+def dining_hall_open(hall=None):
+    if hall is None:
+        return statement("Please specify a dining hall.")
     if hall.lower() == "north avenue":
         return statement(data.is_open("north ave")[1])
     if hall.lower() == "britian":

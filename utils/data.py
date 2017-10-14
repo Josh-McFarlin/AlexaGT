@@ -2,15 +2,35 @@ import time
 import datetime
 from selenium import webdriver
 
-dining = {'north ave': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
-                        'Thursday': '7 AM - 2 AM', 'Friday': '7 AM - 10 PM', 'Saturday': '10 AM - 10 PM',
-                        'Sunday': '10 AM - 12 AM'},
-          'brittain': {'Monday': '7 AM - 8 PM', 'Tuesday': '7 AM - 8 PM', 'Wednesday': '7 AM - 8 PM',
-                       'Thursday': '7 AM - 8 PM', 'Friday': '7 AM - 3 PM', 'Saturday': 'CLOSED',
-                       'Sunday': '4 PM - 8 PM'},
-          'west village': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
-                           'Thursday': '7 AM - 2 AM', 'Friday': '7 AM - 10 PM', 'Saturday': '8 AM - 10 PM',
-                           'Sunday': '8 AM - 2 AM'}}
+dining = {
+    'north ave': {
+        'Monday': '7 AM - 2 AM',
+        'Tuesday': '7 AM - 2 AM',
+        'Wednesday': '7 AM - 2 AM',
+        'Thursday': '7 AM - 2 AM',
+        'Friday': '7 AM - 10 PM',
+        'Saturday': '10 AM - 10 PM',
+        'Sunday': '10 AM - 12 AM'
+    },
+    'brittain': {
+        'Monday': '7 AM - 8 PM',
+        'Tuesday': '7 AM - 8 PM',
+        'Wednesday': '7 AM - 8 PM',
+        'Thursday': '7 AM - 8 PM',
+        'Friday': '7 AM - 3 PM',
+        'Saturday': 'CLOSED',
+        'Sunday': '4 PM - 8 PM'
+    },
+    'west village': {
+        'Monday': '7 AM - 2 AM',
+        'Tuesday': '7 AM - 2 AM',
+        'Wednesday': '7 AM - 2 AM',
+        'Thursday': '7 AM - 2 AM',
+        'Friday': '7 AM - 10 PM',
+        'Saturday': '8 AM - 10 PM',
+        'Sunday': '8 AM - 2 AM'
+    }
+}
 
 
 def is_open(dining_hall):
