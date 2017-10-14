@@ -67,6 +67,8 @@ def diningHours(hall):
 
 
 def courseCritique(str_class):
+    if " " in str_class:
+        str_class = str_class.replace(" ", "")
     browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.get("https://critique.gatech.edu/course.php?id={}".format(str_class))
     avg_gpa = browser.find_element_by_xpath("/ html / body / div / div[1] / div / table / tbody / tr / td[2]").text
