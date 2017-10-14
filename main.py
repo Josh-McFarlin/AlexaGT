@@ -8,11 +8,14 @@ from config import TS_Username, TS_Password
 browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
 
 def login():
-    browser.get( 'https://t-square.gatech.edu')
-    cookies = pickle.load(open("cookies.pkl", "rb"))
-    for cookie in cookies:
-        browser.add_cookie(cookie)
-    browser.get( 'https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
+    browser.get('https://t-square.gatech.edu')
+    try:
+        cookies = pickle.load(open("cookies.pkl", "rb"))
+        for cookie in cookies:
+            browser.add_cookie(cookie)
+    except:
+        print("Error lol")
+    browser.get('https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
     username = browser.find_element_by_id("username")
     password = browser.find_element_by_id("password")
     username.send_keys(TS_Username)
@@ -56,6 +59,5 @@ def format_classes(classes):
         shortened = shortened.replace('-', ' ')
         classes[i] = shortened
     return classes
-
 
 login()
