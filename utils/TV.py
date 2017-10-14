@@ -120,10 +120,12 @@ def find_channel(name):
         keys = list(channels.keys())
         keys_index = [i.find(name) for i in keys]
         print(keys_index)
-        greatest_name = keys[max(keys_index)]
+        print(max(keys_index))
+        greatest_name = keys.index(max(keys_index))
+        print(greatest_name)
         return channels[greatest_name]
 
 
 if __name__ == "__main__":
-    c = find_channel("Dis")
+    c = find_channel("Disc")
     print(c)
