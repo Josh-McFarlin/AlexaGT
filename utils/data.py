@@ -1,13 +1,13 @@
 import time
 import datetime
 
-dining = {'North Ave': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
+dining = {'north ave': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
                         'Thursday': '7 AM - 2 AM', 'Friday': '7 AM - 10 PM', 'Saturday': '10 AM - 10 PM',
                         'Sunday': '10 AM - 12 AM'},
-          'Brittain': {'Monday': '7 AM - 8 PM', 'Tuesday': '7 AM - 8 PM', 'Wednesday': '7 AM - 8 PM',
+          'brittain': {'Monday': '7 AM - 8 PM', 'Tuesday': '7 AM - 8 PM', 'Wednesday': '7 AM - 8 PM',
                        'Thursday': '7 AM - 8 PM', 'Friday': '7 AM - 3 PM', 'Saturday': 'CLOSED',
                        'Sunday': '4 PM - 8 PM'},
-          'West Village': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
+          'west village': {'Monday': '7 AM - 2 AM', 'Tuesday': '7 AM - 2 AM', 'Wednesday': '7 AM - 2 AM',
                            'Thursday': '7 AM - 2 AM', 'Friday': '7 AM - 10 PM', 'Saturday': '8 AM - 10 PM',
                            'Sunday': '8 AM - 2 AM'}}
 
@@ -41,11 +41,11 @@ def isOpen(dining_hall):
 
 def diningOpen():
     openlist = []
-    if isOpen("North Ave")[0]:
+    if isOpen("north ave")[0]:
         openlist.append("North Ave")
-    if isOpen("Brittain")[0]:
+    if isOpen("brittain")[0]:
         openlist.append("Brittain")
-    if isOpen("West Village")[0]:
+    if isOpen("west village")[0]:
         openlist.append("West Village")
     if len(openlist) == 0:
         return "Nothing is open today"
