@@ -150,6 +150,10 @@ def channel(chaname):
         msg = "Sorry, this channel is not available."
     return statement(msg)
 
+@ask.intent('Smoke')
+def stop():
+    return statement("Baasim Rehan is smoking it up.")
+
 
 @ask.intent('AMAZON.PauseIntent')
 def pause():
