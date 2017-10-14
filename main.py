@@ -1,34 +1,49 @@
 import time
+import pickle
 from selenium import webdriver
 import re
 from config import TS_Username, TS_Password
 
+
 browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
 
-
 def login():
-    browser.get(
-        'https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
+    browser.get('https://t-square.gatech.edu')
+    try:
+        cookies = pickle.load(open("cookies.pkl", "rb"))
+        for cookie in cookies:
+            browser.add_cookie(cookie)
+    except:
+        print("Error lol")
+    try:
+        browser.get('https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer')
+        username = browser.find_element_by_id("username")
+        password = browser.find_element_by_id("password")
+        username.send_keys(TS_Username)
+        password.send_keys(TS_Password)
+        browser.find_element_by_name("submit").click()
+        time.sleep(5)
+        if "portal" not in browser.current_url:
+            doDuo()
+    except:
+        print("error level 2")
 
-    username = browser.find_element_by_id("username")
-    password = browser.find_element_by_id("password")
 
-    username.send_keys(TS_Username)
-    password.send_keys(TS_Password)
-
-    browser.find_element_by_name("submit").click()
-
-    time.sleep(5)
+def doDuo():
     browser.switch_to_frame("duo_iframe")
+    time.sleep(4)
+    #driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
+    browser.find_element_by_xpath("/html/body/div/div[1]/div/form/div/div/label/input").click()
     browser.find_element_by_class_name("auth-button").click()
-
     time.sleep(10)
+    pickle.dump(browser.get_cookies(), open("cookies.pkl", "wb"))
+
+
 
 
 # xPath = '//*[@id="siteLinkList"]/li[6]/a/span/span'
 xPath = '//*[@id="siteLinkList"]/li[2]/a/span'
 def getClasses():
-    """
     login()
     classes = []
    # browser.find_element_by_xpath(xPath).click()
@@ -38,9 +53,43 @@ def getClasses():
             classes.append(ele.get_attribute("title"))
         except:
             continue
-    return classes
-    """
-    return format_classes(['CS-1100-D2', 'CS-1331', 'ENGL-1101-A1,B2,C', 'HIST-2111-A', 'MATH-1552-B1,B2,B3'])
+    return format_classes(classes)
+
+def getMealSwipes():
+    login()
+    browser.get("https://mealplan.gatech.edu/dashboard")
+    time.sleep(3)
+    left = ""
+    try:
+        ele = browser.find_element_by_id("blockplanBalance")
+        left = ele.text
+    except:
+        print("frick")
+    return "You have {} Meal Swipes left".format(left)
+
+def getDiningDollars():
+    login()
+    browser.get("https://mealplan.gatech.edu/dashboard")
+    time.sleep(3)
+    left = ""
+    try:
+        ele = browser.find_element_by_id("diningpointsBalance")
+        left = ele.text
+    except:
+        print("frick")
+    return "You have ${} of Dining Dollars left".format(left)
+
+def getBuzzFunds():
+    login()
+    browser.get("https://mealplan.gatech.edu/dashboard")
+    time.sleep(3)
+    left = ""
+    try:
+        ele = browser.find_element_by_id("buzzcardBalance")
+        left = ele.text
+    except:
+        print("frick")
+    return "You have {} of Buzzfunds left. Buying Ramen".format(left)
 
 
 def format_classes(classes):
@@ -50,7 +99,3 @@ def format_classes(classes):
         shortened = shortened.replace('-', ' ')
         classes[i] = shortened
     return classes
-
-
-if __name__ == "__main__":
-    print(getClasses())
