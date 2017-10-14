@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session, audio, context
-from utils import Buses, data
+from utils import Buses, data, Tweets
 from main import getClasses
 import requests
 
@@ -87,6 +87,13 @@ def wrek_radio():
 @ask.intent('GTPD')
 def gtpd():
     msg = render_template('GTPD')
+    return statement(msg)
+
+
+@ask.intent('TwitterUpdates')
+def twit():
+    tweets = Tweets.get_tweets('GeorgiaTech', 3)
+    msg = render_template('Tweets', tweets=tweets)
     return statement(msg)
 
 

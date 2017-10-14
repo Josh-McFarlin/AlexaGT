@@ -1,4 +1,4 @@
-GoodWord: <speak><emphasis level="strong">To hell with Georgia!</emphasis></speak>
+GoodWord: To hell with Georgia!
 
 MyClasses: Your classes are {{ classes|join(", ") }}.
 
@@ -59,3 +59,5 @@ GeorgePBurdell: >
  so Burdell obtained a B.S. 1930, got a Master's, and in World War II, went to Harvard and joined the Army Air Forces.
 
 GTPD: 404 894 2500
+
+Tweets: Buzz's recent tweets include {{ tweets|join("... ") }}.

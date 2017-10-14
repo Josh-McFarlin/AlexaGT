@@ -20,7 +20,7 @@ def get_tweets(user_name, count):
             txt = txt.replace(i, "")
         joined = "{author} on {time}: {txt}".format(author=user_name, time=time_format, txt=txt)
         tweets.append(joined)
-    return "\n".join(tweets)
+    return tweets
 
 
 if __name__ == "__main__":
