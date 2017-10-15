@@ -1,4 +1,5 @@
 import time
+from flask import render_template
 from selenium import webdriver
 import re
 
@@ -46,7 +47,7 @@ def getClasses():
         except:
             continue
     myfile = open("data.txt", "w")
-    myfile.write("Classes:" + format_classes(classes))
+    myfile.write("Classes:" + render_template('MyClasses', classes=format_classes(classes)))
     myfile.close()
 
 

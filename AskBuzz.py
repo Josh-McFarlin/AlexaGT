@@ -65,8 +65,7 @@ def george_burdell():
 
 @ask.intent("MyClasses")
 def good_word():
-    msg = render_template('MyClasses', classes=main.get_str_from_file("Classes"))
-    return statement(msg)
+    return statement(main.get_str_from_file("Classes"))
 
 
 @ask.intent("Setup")
