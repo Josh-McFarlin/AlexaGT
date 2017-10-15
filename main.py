@@ -72,28 +72,22 @@ def get_meal_swipes():
     except:
         print("frick")
 
-    myfile = open("data.txt", "w")
-    myfile.write(get_saved_data() + "\nMealSwipes:" + "You have {} Meal Swipes left".format(left))
+    myfile = open("data.txt", "a")
+    myfile.write("\nMealSwipes:" + "You have {} Meal Swipes left".format(left))
     myfile.close()
-
-def get_saved_data():
-    myfile = open("data.txt", "r")
-    string = myfile.read()
-    myfile.close()
-    return string
 
 
 def get_dining_dollars():
     browser.get("https://mealplan.gatech.edu/dashboard")
-    time.sleep(2)
+    time.sleep(10)
     left = ""
     try:
         ele = browser.find_element_by_id("diningpointsBalance")
         left = ele.text
     except:
         print("frick")
-    myfile = open("data.txt", "w")
-    myfile.write(get_saved_data() + "\nDiningDollars:" + "You have ${} of Dining Dollars left".format(left))
+    myfile = open("data.txt", "a")
+    myfile.write("\nDiningDollars:" + "You have ${} of Dining Dollars left".format(left))
     myfile.close()
 
 
@@ -107,8 +101,8 @@ def get_buzz_funds():
     except:
         print("frick")
 
-    myfile = open("data.txt", "w")
-    myfile.write(get_saved_data() + "\nBuzzFunds:" + "You have {} of Buzzfunds left.".format(left))
+    myfile = open("data.txt", "a")
+    myfile.write("\nBuzzFunds:" + "You have {} of Buzzfunds left.".format(left))
     myfile.close()
 
 
