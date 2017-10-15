@@ -3,7 +3,6 @@ import pickle
 from selenium import webdriver
 import re
 
-
 browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
 #browser.implicitly_wait(10)
 
@@ -91,10 +90,19 @@ def get_buzz_funds(user, passw):
     return "You have {} of Buzzfunds left. Buying Ramen".format(left)
 
 
+classChange = {"ENGL": "English", "CHEM": "Chemistry", "MATH": "Math", "PSYCH": "Psychology", "BIO": "Biology",
+ "ARCH": "Architecture", "ECE": "Electrical and Computer Engineering", "CS": "Computer Science", "HIST": "History",
+ "POL": "Politics", "ECON": "Economics", "APPH": "Applied Physiology"}
+
+
 def format_classes(classes):
+    returnclass = []
     for i in range(len(classes)):
         m = re.search('[a-zA-Z]+-\d*', classes[i])
         shortened = m.group(0)
         shortened = shortened.replace('-', ' ')
         classes[i] = shortened
-    return classes
+    for thing in classes:
+        splitclass = thing.split(" ")
+        returnclass.append(classChange[splitclass[0]] + " " + splitclass[1])
+    return returnclass
