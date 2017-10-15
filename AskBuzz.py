@@ -65,28 +65,44 @@ def george_burdell():
 
 @ask.intent("MyClasses")
 def good_word():
-    user, passw = get_login()
-    classes = main.getClasses(user, passw)
-    msg = render_template('MyClasses', classes=classes)
+    msg = render_template('MyClasses', classes=main.get_str_from_file("Classes"))
     return statement(msg)
+
+
+@ask.intent("Setup")
+def setup():
+    myfile = open("data", "w")
+    myfile.write("")
+    myfile.close()
+
+    user, passw = get_login()
+    print("Loging in")
+    main.login(user, passw)
+    print("Setting up Classes")
+    main.getClasses()
+    print("Setting up Meal Swipes")
+    main.get_meal_swipes()
+    print("Setting up Dining Dollars")
+    main.get_dining_dollars()
+    print("Setting up Buzz Funds")
+    main.get_buzz_funds()
+    print("Set up")
+    return statement("I'm Ready to make it work!")
 
 
 @ask.intent("MyMealSwipes")
 def good_word():
-    user, passw = get_login()
-    return statement(main.get_meal_swipes(user, passw))
+    return statement(main.get_str_from_file("MealSwipes"))
 
 
 @ask.intent("MyDiningDollars")
 def good_word():
-    user, passw = get_login()
-    return statement(main.get_dining_dollars(user, passw))
+    return statement(main.get_str_from_file("DiningDollars"))
 
 
 @ask.intent("MyBuzzFunds")
 def good_word():
-    user, passw = get_login()
-    return statement(main.get_buzz_funds(user, passw))
+    return statement(main.get_str_from_file("BuzzFunds"))
 
 
 @ask.intent("AllDiningOpen")
@@ -166,6 +182,7 @@ def channel(chaname):
     else:
         msg = "Sorry, this channel is not available."
     return statement(msg)
+
 
 @ask.intent('Smoke')
 def stop():
