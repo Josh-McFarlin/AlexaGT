@@ -1,9 +1,8 @@
 import logging
+import requests
 from flask import Flask, render_template
 from flask_ask import Ask, statement, audio, context, session
-from utils import Buses, data, Tweets, TV, RSS
-import main
-import requests
+from utils import buses, dining, tweets, tv, rss, tech_scraper
 
 app = Flask(__name__)
 
@@ -65,60 +64,59 @@ def george_burdell():
 
 @ask.intent("MyClasses")
 def good_word():
-    return statement(main.get_str_from_file("Classes"))
+    return statement(tech_scraper.get_str_from_file("Classes"))
 
 
 @ask.intent("Setup")
 def setup():
-    myfile = open("data", "w")
+    myfile = open("data.txt", "w")
     myfile.write("")
     myfile.close()
-
     user, passw = get_login()
-    print("Loging in")
-    main.login(user, passw)
+    print("Logging in")
+    tech_scraper.login(user, passw)
     print("Setting up Classes")
-    main.getClasses()
+    tech_scraper.get_classes()
     print("Setting up Meal Swipes")
-    main.get_meal_swipes()
+    tech_scraper.get_meal_swipes()
     print("Setting up Dining Dollars")
-    main.get_dining_dollars()
+    tech_scraper.get_dining_dollars()
     print("Setting up Buzz Funds")
-    main.get_buzz_funds()
+    tech_scraper.get_buzz_funds()
     print("Set up")
     return statement("I'm Ready to make it work!")
 
 
 @ask.intent("MyMealSwipes")
 def good_word():
-    return statement(main.get_str_from_file("MealSwipes"))
+    return statement(tech_scraper.get_str_from_file("MealSwipes"))
 
 
 @ask.intent("MyDiningDollars")
 def good_word():
-    return statement(main.get_str_from_file("DiningDollars"))
+    return statement(tech_scraper.get_str_from_file("DiningDollars"))
 
 
 @ask.intent("MyBuzzFunds")
 def good_word():
-    return statement(main.get_str_from_file("BuzzFunds"))
+    return statement(tech_scraper.get_str_from_file("BuzzFunds"))
 
 
 @ask.intent("AllDiningOpen")
 def dining_opens():
-    return statement(data.dining_open())
+    return statement(dining.dining_open())
 
 
 @ask.intent("GetNews")
 def get_news():
-    news = RSS.get_news(4)
+    news = rss.get_news(4)
     msg = render_template('News', news=news)
     return statement(msg)
 
 
 @ask.intent("GetEvents")
 def get_events():
-    events = RSS.get_events(5)
+    events = rss.get_events(5)
     msg = render_template('Events', events=events)
     return statement(msg)
 
@@ -128,10 +126,10 @@ def dining_hall_open(hall=None):
     if hall is None:
         return statement("Please specify a dining hall.")
     if hall.lower() == "north avenue":
-        return statement(data.is_open("north ave")[1])
+        return statement(dining.is_open("north ave")[1])
     if hall.lower() == "britian":
-        return statement(data.is_open("brittain")[1])
-    return statement(data.is_open(hall.lower())[1])
+        return statement(dining.is_open("brittain")[1])
+    return statement(dining.is_open(hall.lower())[1])
 
 
 @ask.intent("DiningHallHours")
@@ -139,15 +137,15 @@ def dining_hall_hours(hall=None):
     if hall is None:
         return statement("Please specify a dining hall.")
     if hall.lower() == "north avenue":
-        return statement(data.dining_hours("north ave"))
+        return statement(dining.dining_hours("north ave"))
     if hall.lower() == "britian":
-        return statement(data.dining_hours("brittain"))
-    return statement(data.dining_hours(hall.lower()))
+        return statement(dining.dining_hours("brittain"))
+    return statement(dining.dining_hours(hall.lower()))
 
 
 @ask.intent("ClassAvg")
 def get_class_avg(classname):
-    return statement(data.course_critique(classname))
+    return statement(dining.course_critique(classname))
 
 
 @ask.intent("NextBus")
@@ -155,15 +153,15 @@ def next_bus(col=None):
     if col is None:
         return statement("Please specify a bus route.")
     echo_location = get_alexa_location()
-    u = Buses.User(echo_location)
-    nxt = Buses.sort_stops(u.lat, u.lng, col.lower())
+    u = buses.User(echo_location)
+    nxt = buses.sort_stops(u.lat, u.lng, col.lower())
     return statement(nxt)
 
 
 @ask.intent("TwitterUpdates")
 def twit():
-    tweets = Tweets.get_tweets('GeorgiaTech', 3)
-    msg = render_template('Tweets', tweets=tweets)
+    twts = tweets.get_tweets('GeorgiaTech', 3)
+    msg = render_template('Tweets', tweets=twts)
     return statement(msg)
 
 
@@ -182,14 +180,14 @@ def gtpd():
 
 @ask.intent('TwitterUpdates')
 def twit():
-    tweets = Tweets.get_tweets('GeorgiaTech', 3)
-    msg = render_template('Tweets', tweets=tweets)
+    twts = tweets.get_tweets('GeorgiaTech', 3)
+    msg = render_template('Tweets', tweets=twts)
     return statement(msg)
 
 
 @ask.intent('GetChannel')
 def channel(chaname):
-    tv_channel = TV.find_channel(chaname)
+    tv_channel = tv.find_channel(chaname)
     if tv_channel:
         msg = "{name} is on channel {num}.".format(name=chaname, num=tv_channel)
     else:

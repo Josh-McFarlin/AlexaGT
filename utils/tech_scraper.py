@@ -1,15 +1,10 @@
 import time
-from flask import render_template
 from selenium import webdriver
 import re
 
-browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
-
-
-# browser.implicitly_wait(10)
-
 
 def login(user, passw):
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.get('https://t-square.gatech.edu')
     try:
         url = 'https://login.gatech.edu/cas/login?service=https%3A%2F%2Ft-square.gatech.edu%2Fsakai-login-tool%2Fcontainer'
@@ -22,12 +17,13 @@ def login(user, passw):
         time.sleep(5)
         if "portal" not in browser.current_url:
             print("Redirect to Duo")
-            doDuo()
+            do_duo()
     except:
         print("Already logged in.")
 
 
-def doDuo():
+def do_duo():
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.switch_to_frame("duo_iframe")
     print("Waiting for iFrame load")
     time.sleep(4)
@@ -38,23 +34,26 @@ def doDuo():
     print("Hope you clicked it!")
 
 
-def getClasses():
+def get_classes():
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     classes = []
     for num in range(2, 10):
         try:
             ele = browser.find_element_by_xpath('//*[@id="siteLinkList"]/li[{}]/a'.format(num))
-            classes.append(ele.get_attribute("title"))
+            clas = ele.get_attribute("title")
+            if clas != "More Sites":
+                classes.append(clas)
         except:
-            continue
-    myfile = open("data.txt", "w")
-    myfile.write("Classes:" + render_template('MyClasses', classes=format_classes(classes)))
-    myfile.close()
+            pass
+    classes = format_classes(classes)
+    with open("data.txt", "a") as myfile:
+        myfile.write("Classes:" + "Your classes are {}.".format(", ".join(classes)))
+    browser.close()
 
 
 def get_str_from_file(title):
-    myfile = open("data.txt", "r")
-    lines = myfile.readlines()
-    myfile.close()
+    with open("data.txt", "r") as myfile:
+        lines = myfile.readlines()
 
     for line in lines:
         if title in line:
@@ -63,8 +62,9 @@ def get_str_from_file(title):
 
 
 def get_meal_swipes():
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.get("https://mealplan.gatech.edu/dashboard")
-    time.sleep(5)
+    time.sleep(4)
     left = ""
     try:
         ele = browser.find_element_by_id("blockplanBalance")
@@ -72,28 +72,30 @@ def get_meal_swipes():
     except:
         print("frick")
 
-    myfile = open("data.txt", "a")
-    myfile.write("\nMealSwipes:" + "You have {} Meal Swipes left".format(left))
-    myfile.close()
+    with open("data.txt", "a") as myfile:
+        myfile.write("\nMealSwipes:" + "You have {} Meal Swipes left".format(left))
+    browser.close()
 
 
 def get_dining_dollars():
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.get("https://mealplan.gatech.edu/dashboard")
-    time.sleep(10)
+    time.sleep(4)
     left = ""
     try:
         ele = browser.find_element_by_id("diningpointsBalance")
         left = ele.text
     except:
         print("frick")
-    myfile = open("data.txt", "a")
-    myfile.write("\nDiningDollars:" + "You have ${} of Dining Dollars left".format(left))
-    myfile.close()
+    with open("data.txt", "a") as myfile:
+        myfile.write("\nDiningDollars:" + "You have ${} of Dining Dollars left".format(left))
+    browser.close()
 
 
 def get_buzz_funds():
+    browser = webdriver.PhantomJS("/usr/local/bin/phantomjs")
     browser.get("https://mealplan.gatech.edu/dashboard")
-    time.sleep(3)
+    time.sleep(4)
     left = ""
     try:
         ele = browser.find_element_by_id("buzzcardBalance")
@@ -101,25 +103,31 @@ def get_buzz_funds():
     except:
         print("frick")
 
-    myfile = open("data.txt", "a")
-    myfile.write("\nBuzzFunds:" + "You have {} of Buzzfunds left.".format(left))
-    myfile.close()
+    with open("data.txt", "a") as myfile:
+        myfile.write("\nBuzzFunds:" + "You have {} of Buzzfunds left.".format(left))
+    browser.close()
 
 
 classChange = {"ENGL": "English", "CHEM": "Chemistry", "MATH": "Math", "PSYCH": "Psychology", "BIO": "Biology",
                "ARCH": "Architecture", "ECE": "Electrical and Computer Engineering", "CS": "Computer Science",
                "HIST": "History",
-               "POL": "Politics", "ECON": "Economics", "APPH": "Applied Physiology"}
+               "POL": "Politics", "ECON": "Economics", "APPH": "Applied Physiology", "GT": "GT"}
 
 
 def format_classes(classes):
     returnclass = []
     for i in range(len(classes)):
-        m = re.search('[a-zA-Z]+-\d*', classes[i])
-        shortened = m.group(0)
-        shortened = shortened.replace('-', ' ')
-        classes[i] = shortened
+        try:
+            m = re.search('[a-zA-Z]+[-_]?[\d]{4}(?!\n)', classes[i])
+            shortened = m.group(0)
+            shortened = shortened.replace('-', ' ')
+            shortened = shortened.replace('_', ' ')
+            shortened = " ".join(re.split('(\d+)', shortened))
+            shortened = shortened.replace("  ", " ")
+            classes[i] = shortened
+        except:
+            pass
     for thing in classes:
-        splitclass = thing.split(" ")
+        splitclass = thing.split(" ")[:2]
         returnclass.append(classChange[splitclass[0]] + " " + splitclass[1])
     return returnclass

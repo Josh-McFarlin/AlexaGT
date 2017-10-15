@@ -1,6 +1,6 @@
 import requests
 from config import GMaps_key
-from utils.BusStops import routes
+from utils.bus_stops import routes
 from datetime import date
 
 
@@ -27,7 +27,6 @@ class User:
 def sort_stops(your_lat, your_lng, route):
     day_week = date.today().strftime("%A")
     if (day_week == "Saturday" or day_week == "Sunday") and (route == "red" or route == "blue" or route == "green"):
-        print(route)
         return "Sorry, this bus doesn't run on the weekend."
     try:
         coords = list(routes[route].values())
