@@ -58,5 +58,3 @@ GeorgePBurdell: >
 GTPD: 404 894 2500
 
 Tweets: Recent tweets include {{ tweets|join(", ") }}.
-
-Channel: &name is on channel &channel.
