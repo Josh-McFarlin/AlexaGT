@@ -1,4 +1,4 @@
-# AlexaGT
+# AskBuzz
 
 ### An Alexa skill for use by Georgia Tech students.
 
