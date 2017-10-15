@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, render_template
 from flask_ask import Ask, statement, audio, context, session
-from utils import Buses, data, Tweets, TV
+from utils import Buses, data, Tweets, TV, RSS
 import main
 import requests
 
@@ -107,6 +107,20 @@ def good_word():
 @ask.intent("AllDiningOpen")
 def dining_opens():
     return statement(data.dining_open())
+
+
+@ask.intent("GetNews")
+def get_news():
+    news = RSS.get_news(4)
+    msg = render_template('News', news=news)
+    return statement(msg)
+
+
+@ask.intent("GetEvents")
+def get_events():
+    events = RSS.get_events(5)
+    msg = render_template('Events', events=events)
+    return statement(msg)
 
 
 @ask.intent("DiningHallOpen")
